@@ -58,21 +58,23 @@ Sample Output 2 :
 5 */
 
 
-int flipBits (int* arr, int n) 
+int flipBits(int* arr, int n) 
 {
-    int sum=0,c=0,aux=0;
-    for(int i=0;i<n;i++)
-    {
-        if(arr[i]==1)
-        {
-            c++;
-            aux = max(-1, aux-1);
+    int count0=0,maxcount=0,count1=0;
+    for(int i=0;i<n;i++){
+        if(arr[i]==0){
+            count0++;
         }
-        else
-        {
-            aux = max(1, aux+1);
+        else{
+            count1++;
+            count0--;
         }
-        sum = max(sum, aux);
+        if(count0 > maxcount){
+            maxcount=count0;
+        }
+        if(count0 < 0){
+            count0=0;
+        }
     }
-    return c+sum;
+    return maxcount+count1;
 }
